@@ -8,3 +8,5 @@
 ### How to run it?
 
 `go run *.go`
+
+It will start the server on `http://localhost:1000`
