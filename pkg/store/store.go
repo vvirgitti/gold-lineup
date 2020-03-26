@@ -113,6 +113,3 @@ func (s PlayerStore) GetStats() []players.Player {
 	return playersList
 }
 
-//func (s PlayerStore) GetStats() []players.Player  {
-//	return []players.Player{}
-//}
