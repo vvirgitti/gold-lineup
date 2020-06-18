@@ -16,9 +16,6 @@ func main() {
 
 	http.HandleFunc("/", server.ReturnPlayersStats)
 
-	http.HandleFunc("/auth/google/login", server.Authorize)
-	http.HandleFunc("/auth/google/token", server.Token)
-
 	log.Println("Client is running on port 1000")
 	http.ListenAndServe(":1000", nil)
 }
