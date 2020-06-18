@@ -8,7 +8,7 @@
 
 - [x] Server returns data from Google Sheet
 
-- [ ] Styling - using Go templates
+- [x] Styling - using Go templates
 
 - [ ] Add Firebase hosting
 
