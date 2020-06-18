@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<h1>Softball Lineup builder</h1>
+
+<h3>Current stats</h3>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Gender</td>
+        <td>OBP</td>
+        <td>SLG</td>
+    </tr>
+    {{ range .}}
+    <tr>
+        <td>{{ .Name }}</td>
+        <td>{{ .Gender }}</td>
+        <td>{{ .Obp }}</td>
+        <td>{{ .Slg }}</td>
+    </tr>
+    {{end}}
+</table>
+</body>
+</html>

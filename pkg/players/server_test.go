@@ -32,7 +32,7 @@ func TestPlayerServer(t *testing.T) {
 	})
 
 	t.Run("returns the stats for all players", func(t *testing.T) {
-		store := stubStore{players: []players.Player{{"Sawamura", "Male", 0.10, 0.10}, {"Furuya", "Male", 0.12, 0.12}}}
+		store := stubStore{players: []players.Player{{"Sawamura", "Male", "0.10", "0.10"}, {"Furuya", "Male", "0.12", "0.12"}}}
 
 		req, _ := http.NewRequest(http.MethodGet, "/", nil)
 		response := httptest.NewRecorder()
