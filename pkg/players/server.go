@@ -2,6 +2,7 @@ package players
 
 import (
 	"html/template"
+	"log"
 	"net/http"
 )
 
@@ -29,8 +30,18 @@ func NewServer(store PlayerStore) *Server {
 func (s Server) ReturnPlayersStats(w http.ResponseWriter, _ *http.Request) {
 	players := s.store.GetStats()
 
-	t := template.Must(template.ParseFiles("frontend/index.gohtml"))
+	files := []string{"./frontend/stats.tmpl", "./frontend/layout.tmpl", "./frontend/header.tmpl"}
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+		return
+	}
 
-	t.Execute(w, players)
+	err = ts.Execute(w, players)
+	if err != nil {
+		log.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 
 }

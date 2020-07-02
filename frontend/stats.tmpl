@@ -1,0 +1,30 @@
+{{template "base" .}}
+
+{{define "title"}}Stats{{end}}
+
+{{define "stats"}}
+
+  <div class="container">
+    <h1>Current stats</h1>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">OBP</th>
+        <th scope="col">SLG</th>
+      </tr>
+      </thead>
+      <tbody>
+      {{ range .}}
+        <tr>
+          <th scope="row">{{ .Name }}</th>
+          <td>{{ .Gender }}</td>
+          <td>{{ .Obp }}</td>
+          <td>{{ .Slg }}</td>
+        </tr>
+      {{end}}
+      </tbody>
+    </table>
+  </div>
+{{end}}
