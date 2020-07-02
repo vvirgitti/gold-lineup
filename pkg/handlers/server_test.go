@@ -1,18 +1,18 @@
-package players_test
+package handlers_test
 
 import (
 	"encoding/json"
-	"github.com/vvirgitti/gold-lineup/pkg/players"
+	"github.com/vvirgitti/gold-lineup/pkg/handlers"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 )
 
 type stubStore struct {
-	players []players.Player
+	players []handlers.Player
 }
 
-func (s stubStore) GetStats() []players.Player  {
+func (s stubStore) GetStats() []handlers.Player  {
 	return s.players
 }
 
@@ -23,8 +23,8 @@ func TestPlayerServer(t *testing.T) {
 
 		store := stubStore{}
 
-		server := players.NewServer(store)
-		server.ReturnPlayersStats(response, req)
+		server := handlers.NewServer(store)
+		server.StatsHandler(response, req)
 
 		if response.Code != 200 {
 			t.Errorf("expected 200, got %d", response.Code)
@@ -32,15 +32,15 @@ func TestPlayerServer(t *testing.T) {
 	})
 
 	t.Run("returns the stats for all players", func(t *testing.T) {
-		store := stubStore{players: []players.Player{{"Sawamura", "Male", "0.10", "0.10"}, {"Furuya", "Male", "0.12", "0.12"}}}
+		store := stubStore{players: []handlers.Player{{"Sawamura", "Male", "0.10", "0.10"}, {"Furuya", "Male", "0.12", "0.12"}}}
 
 		req, _ := http.NewRequest(http.MethodGet, "/", nil)
 		response := httptest.NewRecorder()
 
-		server := players.NewServer(store)
-		server.ReturnPlayersStats(response, req)
+		server := handlers.NewServer(store)
+		server.StatsHandler(response, req)
 
-		var newPlayers []players.Player
+		var newPlayers []handlers.Player
 
 		err := json.NewDecoder(response.Body).Decode(&newPlayers)
 		if err != nil {

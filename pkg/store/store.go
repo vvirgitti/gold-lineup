@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 	"github.com/vvirgitti/gold-lineup/pkg/config"
-	"github.com/vvirgitti/gold-lineup/pkg/players"
+	"github.com/vvirgitti/gold-lineup/pkg/handlers"
 	_ "google.golang.org/api/compute/v1"
 	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
@@ -23,7 +23,7 @@ func NewStore(config config.Config, googleClient *http.Client) *PlayerStore {
 	}
 }
 
-func (ps PlayerStore) GetStats() []players.Player {
+func (ps PlayerStore) GetStats() []handlers.Player {
 	ctx := context.Background()
 	client := ps.googleClient
 
@@ -39,14 +39,14 @@ func (ps PlayerStore) GetStats() []players.Player {
 		log.Fatalf("Unable to retrieve data from sheet: %v", err)
 	}
 
-	var playersList []players.Player
+	var playersList []handlers.Player
 
 	if len(resp.Values) == 0 {
 		log.Fatalf("data not found")
 	}
 
 	for _, value := range resp.Values {
-		player := players.Player{
+		player := handlers.Player{
 			Name:   value[0].(string),
 			Gender: value[1].(string),
 			Obp:    value[18].(string),
