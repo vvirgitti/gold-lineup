@@ -2,35 +2,24 @@ package google
 
 import (
 	"context"
-	"github.com/vvirgitti/gold-lineup/pkg/config"
-	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
 
-func OauthConfig() *oauth2.Config{
-	conf := config.NewConfig()
-	scope := []string{"https://www.googleapis.com/auth/spreadsheets"}
 
-	return &oauth2.Config{
-		ClientID:     conf.GoogleClientId,
-		ClientSecret: conf.GoogleClientSecret,
-		RedirectURL:  "http://localhost:1000/authentication/google/token",
-		Scopes:       scope,
-		Endpoint: google.Endpoint,
-	}
-}
-
-
-func GoogleClient(code string) *http.Client{
-	conf := OauthConfig()
+func GoogleClient() (*http.Client){
 	ctx := context.Background()
-	tok, err := conf.Exchange(ctx, "authorization-code")
+	b, err := ioutil.ReadFile("service_account.json")
 	if err != nil {
-		log.Fatal("Unable to get token from OAuth", err)
+		log.Fatalf("Unable to read client secret file: %v", err)
 	}
 
-	client := conf.Client(ctx, tok)
-	return client
+	config, err := google.JWTConfigFromJSON(b, "https://www.googleapis.com/auth/spreadsheets.readonly")
+	if err != nil {
+		log.Fatalf("Unable to parse client secret file to config: %v", err)
+	}
+
+	return config.Client(ctx)
 }

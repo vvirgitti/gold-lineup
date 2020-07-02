@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/vvirgitti/gold-lineup/pkg/config"
+	"github.com/vvirgitti/gold-lineup/pkg/google"
 	"github.com/vvirgitti/gold-lineup/pkg/players"
 	"github.com/vvirgitti/gold-lineup/pkg/store"
 	"log"
@@ -11,7 +12,7 @@ import (
 func main() {
 	conf := config.NewConfig()
 
-	playerStore := store.NewStore(conf)
+	playerStore := store.NewStore(conf, google.GoogleClient())
 	server := players.NewServer(playerStore)
 
 	http.HandleFunc("/", server.ReturnPlayersStats)
