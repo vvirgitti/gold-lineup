@@ -23,7 +23,7 @@
 
 It will start the server on `http://localhost:1000`
 
-You will need a credentials.json file and also a token.json
+You will need a service_account.json at the root of the project
 
 
 ### Run the tests
