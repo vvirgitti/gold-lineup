@@ -5,5 +5,69 @@
 {{define "home"}}
   <div class="container">
     <h1>Welcome! This is a Softball Lineup App</h1>
+    <div class="row">
+    <div class="col">
+      <form>
+        <div class="form-group">
+          <label for="playerName">Player name</label>
+          <input type="name" class="form-control" id="playerName">
+        </div>
+        <div class="form-group">
+          <label for="playerName">Gender</label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option>Male</option>
+            <option>Female</option>
+            <option>Non Binary</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <label>Please select one or several field position(s)</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pitcher" id="position-pitcher">
+          <label class="form-check-label" for="position-pitcher">
+            Pitcher
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pitcher" id="position-catch">
+          <label class="form-check-label" for="position-catch">
+            Catch
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pitcher" id="position-first">
+          <label class="form-check-label" for="position-first">
+            First
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pitcher" id="position-second">
+          <label class="form-check-label" for="position-second">
+            Second
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pitcher" id="position-third">
+          <label class="form-check-label" for="position-third">
+            Third
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pitcher" id="position-short">
+          <label class="form-check-label" for="position-short">
+            Short
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="pitcher" id="position-outfield">
+          <label class="form-check-label" for="position-outfield">
+            Outfield
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary float-right">Submit</button>
+      </form>
+    </div>
+    <div class="col"></div>
+    </div>
   </div>
 {{end}}
